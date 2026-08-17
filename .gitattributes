@@ -1,0 +1,9 @@
+# This project builds and runs inside Linux containers: keep LF everywhere,
+# regardless of the contributor's core.autocrlf setting. CRLF in the Dockerfile
+# or in main.py's shebang/scripts breaks the image at build or run time.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.onnx binary
+*.bin binary

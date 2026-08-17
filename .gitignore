@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.onnx
+*.bin
+
+# local task notes, not part of the published project
+HANDOVER.md

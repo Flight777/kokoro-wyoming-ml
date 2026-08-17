@@ -1,0 +1,16 @@
+# Standalone compose for kokoro-wyoming-ml (or merge the service into your stack).
+services:
+  kokoro-tts:
+    build: .
+    image: local/kokoro-wyoming-ml:latest
+    pull_policy: never
+    container_name: kokoro-tts
+    restart: unless-stopped
+    ports:
+      - "10210:10210"
+    environment:
+      - KOKORO_SPEED=1.0
+      - KOKORO_VOICE=zf_xiaoxiao
+      - ONNX_PROVIDER=CUDAExecutionProvider
+      - NVIDIA_VISIBLE_DEVICES=all
+    runtime: nvidia
