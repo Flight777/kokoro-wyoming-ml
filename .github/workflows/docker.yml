@@ -13,15 +13,27 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
+
+      # ghcr.io rejects any tag whose repository path contains uppercase, and
+      # github.repository carries the owner's original casing. metadata-action
+      # lowercases it for us (and adds OCI source/revision labels).
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=raw,value=latest
+            type=sha,format=long,prefix=
+
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: |
-            ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ github.sha }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

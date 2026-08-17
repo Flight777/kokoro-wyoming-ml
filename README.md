@@ -60,10 +60,10 @@ so concurrent requests queue instead of thrashing VRAM.
 Pull the prebuilt image:
 
     docker run -d --name kokoro-tts --runtime nvidia \
-      -p 10210:10210 ghcr.io/Flight777/kokoro-wyoming-ml:latest
+      -p 10210:10210 ghcr.io/flight777/kokoro-wyoming-ml:latest
 
-or with compose (edit `docker-compose.yml` to use the `image:` line instead of
-`build: .`):
+or with compose (uncomment the `ghcr.io` image line in `docker-compose.yml` and
+drop `build:` to use the prebuilt image instead of building locally):
 
     docker compose up -d
 

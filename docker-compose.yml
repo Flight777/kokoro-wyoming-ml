@@ -1,6 +1,9 @@
 # Standalone compose for kokoro-wyoming-ml (or merge the service into your stack).
 services:
   kokoro-tts:
+    # To use the prebuilt image, comment out build:/image:/pull_policy: below
+    # and uncomment this line instead (note: lowercase owner — ghcr.io requires it):
+    # image: ghcr.io/flight777/kokoro-wyoming-ml:latest
     build: .
     image: local/kokoro-wyoming-ml:latest
     pull_policy: never
